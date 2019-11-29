@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -17,6 +18,7 @@ namespace Steganography
 
         public string typeOfFile = "";
         public string imagePath = "";
+        public string copyPath = "";
 
         private void Btn_ImportImage_Click(object sender, RoutedEventArgs e)
         {
@@ -30,11 +32,28 @@ namespace Steganography
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            try
+            {
+                File.Delete(copyPath);
+            }
+            catch
+            {
+                //
+            }
             Environment.Exit(0);
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            try
+            {
+                File.Delete(copyPath);
+            }
+            catch
+            {
+                //
+            }
+            
             Environment.Exit(0);
         }
 
@@ -47,8 +66,12 @@ namespace Steganography
             {
                 imagePath = openFileDialog.FileName;
                 typeOfFile = TypeOfFile(imagePath).ToLower();
-                imgsource.Source = new BitmapImage(new Uri(imagePath));
-                //MessageBox.Show(typeOfFile);
+
+                copyPath = AppDomain.CurrentDomain.BaseDirectory + "\\tmp." + typeOfFile;
+
+                File.Copy(imagePath, copyPath, true);
+
+                imgsource.Source = new BitmapImage(new Uri(copyPath));
             }
         }
 
