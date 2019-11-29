@@ -46,7 +46,7 @@ namespace Steganography.Classes
 
             
             MessageBox.Show(index.ToString());      //delete this
-            MessageBox.Show(img_HEX.Substring(index,1));
+            MessageBox.Show(img_HEX.Substring(index + 42 ,5)); //too 1584 - начало отсчета для картинки => 1584 - 1542= 42
         }
         private void Cipher_PNG()
         {
