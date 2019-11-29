@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Collections;
 using System.Windows.Media.Imaging;
+using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Collections.Generic;
+using System.Windows;
+using Microsoft.Win32;
 
 namespace Steganography.Classes
 {
     class Cipher
     {
         private string text, imgPath, typeOfImage;
+
         public Cipher(string text, string imgPath, string typeOfImage)
         {
             this.text = text;
@@ -18,29 +21,32 @@ namespace Steganography.Classes
             this.typeOfImage = typeOfImage;
             Switch();
         }
-
         private void Switch()
         {
             switch (typeOfImage)
             {
-                case ("jpg"): Cipher_JPG();
+                case ("jpg"):
+                    Cipher_JPG();
                     break;
-                case ("jpeg"):Cipher_JPEG();
+                case ("jpeg"):
+                    Cipher_JPG();
                     break;
-                case ("png"): Cipher_PNG();
+                case ("png"):
+                    Cipher_PNG();
                     break;
-                case ("bmp"): Cipher_BMP();
+                case ("bmp"):
+                    Cipher_BMP();
                     break;
             }
         }
-
         private void Cipher_JPG()
         {
+            string img_HEX = BitConverter.ToString(File.ReadAllBytes(imgPath));
+            var index = img_HEX.IndexOf("FF-DA");   //HEX format is XX-XX-XX-XX-XX-XX...
 
-        }
-        private void Cipher_JPEG()
-        {
-
+            
+            MessageBox.Show(index.ToString());      //delete this
+            MessageBox.Show(img_HEX.Substring(index,1));
         }
         private void Cipher_PNG()
         {
@@ -49,7 +55,10 @@ namespace Steganography.Classes
         private void Cipher_BMP()
         {
 
+
         }
+
+
 
     }
 }

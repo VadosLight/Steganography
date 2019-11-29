@@ -27,7 +27,7 @@ namespace Steganography
 
         private void Btn_Cipher_Click(object sender, RoutedEventArgs e)
         {
-            Cipher cipher = new Cipher(text_source.Text, imagePath, typeOfFile);
+            Cipher cipher = new Cipher(text_source.Text, copyPath, typeOfFile);
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -48,17 +48,21 @@ namespace Steganography
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp";
-
+            
+            
             if (openFileDialog.ShowDialog() == true)
             {
+
+                
                 imagePath = openFileDialog.FileName;
                 typeOfFile = TypeOfFile(imagePath).ToLower();
 
                 copyPath = AppDomain.CurrentDomain.BaseDirectory + "\\tmp." + typeOfFile;
 
+                imgsource.Source = new BitmapImage(new Uri(imagePath));
+               
                 File.Copy(imagePath, copyPath, true);
-
-                imgsource.Source = new BitmapImage(new Uri(copyPath));
+              
             }
         }
 
@@ -66,5 +70,7 @@ namespace Steganography
         {
             return fileName.Substring(fileName.LastIndexOf(".") + 1);
         }
+
+        
     }
 }
