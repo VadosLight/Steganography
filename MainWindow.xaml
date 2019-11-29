@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Steganography"
         mc:Ignorable="d"
-        Title="Стеганография" Height="450" Width="800">
+        Title="Стеганография" Height="450" Width="800" Closed="Window_Closed" Closing="Window_Closing">
     <Grid>
         <TabControl  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <TabItem Header="Зашифровать">
@@ -15,8 +15,9 @@
                         <ColumnDefinition Width="51*"/>
                     </Grid.ColumnDefinitions>
                     <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,10,60">
-                        <Image x:Name="img_source"/>
+                        <Image x:Name="imgsource"/>
                     </Border>
+
                     <RichTextBox x:Name="text_source" Grid.Column="1" Margin="10" FontSize="14" FontFamily="Times New Roman" 
                                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                         <FlowDocument>
@@ -36,6 +37,5 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
-        <Grid HorizontalAlignment="Left" Height="100" Margin="333,154,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

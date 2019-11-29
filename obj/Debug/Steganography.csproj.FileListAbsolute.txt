@@ -1,11 +1,10 @@
-D:\Projects\New\InfBez\Steganography\bin\Debug\Steganography.exe.config
-D:\Projects\New\InfBez\Steganography\bin\Debug\Steganography.exe
-D:\Projects\New\InfBez\Steganography\bin\Debug\Steganography.pdb
-D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography.csprojAssemblyReference.cache
 D:\Projects\New\InfBez\Steganography\obj\Debug\MainWindow.g.cs
 D:\Projects\New\InfBez\Steganography\obj\Debug\App.g.cs
 D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography_MarkupCompile.cache
 D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography_MarkupCompile.lref
+D:\Projects\New\InfBez\Steganography\bin\Debug\Steganography.exe.config
+D:\Projects\New\InfBez\Steganography\bin\Debug\Steganography.exe
+D:\Projects\New\InfBez\Steganography\bin\Debug\Steganography.pdb
 D:\Projects\New\InfBez\Steganography\obj\Debug\MainWindow.baml
 D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography.g.resources
 D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography.Properties.Resources.resources
@@ -13,3 +12,4 @@ D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography.csproj.GenerateReso
 D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography.csproj.CoreCompileInputs.cache
 D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography.exe
 D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography.pdb
+D:\Projects\New\InfBez\Steganography\obj\Debug\Steganography.csprojAssemblyReference.cache
