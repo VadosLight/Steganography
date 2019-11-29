@@ -27,33 +27,20 @@ namespace Steganography
 
         private void Btn_Cipher_Click(object sender, RoutedEventArgs e)
         {
-
+            Cipher cipher = new Cipher(text_source.Text, imagePath, typeOfFile);
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            try
-            {
-                File.Delete(copyPath);
-            }
-            catch
-            {
-                //
-            }
+            try{ File.Delete(copyPath); }
+            catch{}
             Environment.Exit(0);
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            try
-            {
-                File.Delete(copyPath);
-            }
-            catch
-            {
-                //
-            }
-            
+            try { File.Delete(copyPath); }
+            catch { }
             Environment.Exit(0);
         }
 
