@@ -7,6 +7,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Windows;
 using Microsoft.Win32;
+using System.Linq;
 
 namespace Steganography.Classes
 {
@@ -41,12 +42,57 @@ namespace Steganography.Classes
         }
         private void Cipher_JPG()
         {
-            string img_HEX = BitConverter.ToString(File.ReadAllBytes(imgPath));
-            var index = img_HEX.IndexOf("FF-DA");   //HEX format is XX-XX-XX-XX-XX-XX...
+            var img_BIN = File.ReadAllBytes(imgPath);
+            //MessageBox.Show(img_BIN[0].ToString());
+            //ff da  = 255 218
+            int FFDA=0; //Индекс начала байта флага начала изображения!!! Не забыть сделать смещение после флага
+            int END_FFDA=0;
+            //ff d9 = 255 217
+            int FFD9=0; //Индекс метки - конец изображения
 
-            
-            MessageBox.Show(index.ToString());      //delete this
-            MessageBox.Show(img_HEX.Substring(index + 42 ,5)); //too 1584 - начало отсчета для картинки => 1584 - 1542= 42
+            //Поиск флагов
+            for (int i = 0; i < img_BIN.Length; i++)
+            {
+                if (img_BIN[i] == 255 && img_BIN[i + 1] == 218)
+                {
+                    FFDA = i;
+                    END_FFDA = i + 14;
+                }
+
+                if (img_BIN[i] == 255 && img_BIN[i + 1] == 217)
+                {
+                    FFD9 = i;
+                    break;
+                }                  
+            }
+            //8a 28 a0 02  == 138 40 160 2
+            //51 45 14 00
+            //51 40 05 14  
+            //45 14 50 01  
+            //a2 80 0a 28  
+            //0a 28 a2
+            for (int i = END_FFDA; i+2 < FFD9;)
+            {
+                if (img_BIN[i] != 0x0a && img_BIN[i+1] != 0x28 && img_BIN[i+2] != 0xa2 && img_BIN[i+3] != 0x8a ||
+                    img_BIN[i] != 0x51 && img_BIN[i + 1] != 0x45 && img_BIN[i + 2] != 0x14 && img_BIN[i + 3] != 0x00 ||
+                    img_BIN[i] != 0x51 && img_BIN[i + 1] != 0x40 && img_BIN[i + 2] != 0x05 && img_BIN[i + 3] != 0x14 ||
+                    img_BIN[i] != 0x45 && img_BIN[i + 1] != 0x14 && img_BIN[i + 2] != 0x50 && img_BIN[i + 3] != 0x01)
+                {
+                    if (img_BIN[i] == 255)
+                        img_BIN[i]--;
+                    else
+                        img_BIN[i]++;
+                    i++;
+                }
+                else
+                {
+                    i += 4;
+                }
+            }
+
+            File.WriteAllBytes(@"C:\Users\Vadim\Desktop\123.jpg", img_BIN);
+
+
         }
         private void Cipher_PNG()
         {
@@ -59,6 +105,14 @@ namespace Steganography.Classes
         }
 
 
+        public static byte[] ConvertToByteArray(string str, Encoding encoding)
+        {
+            return encoding.GetBytes(str);
+        }
 
+        public static String ToBinary(Byte[] data)
+        {
+            return string.Join(" ", data.Select(byt => Convert.ToString(byt, 2).PadLeft(8, '0')));
+        }
     }
 }
