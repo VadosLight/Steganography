@@ -17,27 +17,10 @@ namespace Steganography.Classes
             this.text = text;
             this.imgPath = imgPath;
             this.typeOfImage = typeOfImage;
-            Switch();
+            Cipher_img();
         }
-        private void Switch()
-        {
-            switch (typeOfImage)
-            {
-                case ("jpg"):
-                    Cipher_JPG();
-                    break;
-                case ("jpeg"):
-                    Cipher_JPG();
-                    break;
-                case ("png"):
-                    Cipher_PNG();
-                    break;
-                case ("bmp"):
-                    Cipher_BMP();
-                    break;
-            }
-        }
-        private void Cipher_JPG()
+        
+        private void Cipher_img()
         {
             List<byte> img_comment = new List<byte>();
 
@@ -56,18 +39,6 @@ namespace Steganography.Classes
 
             byte[] c = img_comment.ToArray();
             File.WriteAllBytes(@"C:\Users\Vadim\Desktop\123.jpg", c);
-            
-
-
-        }
-        private void Cipher_PNG()
-        {
-
-        }
-        private void Cipher_BMP()
-        {
-
-
         }
 
 
@@ -84,6 +55,16 @@ namespace Steganography.Classes
 
     class DeCipher
     {
+        private string text, imgPath;
+        public DeCipher(string imgPath)
+        {
+            this.imgPath = imgPath;
+            DeCipher_img();
+        }
 
+        private void DeCipher_img()
+        {
+
+        }
     }
 }
