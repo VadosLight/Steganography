@@ -47,7 +47,7 @@ namespace Steganography
                 imgsource.Source = new BitmapImage(new Uri(imagePath));
 
                 File.Copy(imagePath, copyPath, true);
-
+                btn_Cipher.IsEnabled = true;
             }
         }
 
@@ -77,7 +77,8 @@ namespace Steganography
 
         private void Btn_DeCipher_Click(object sender, RoutedEventArgs e)
         {
-            DeCipher deCipher = new DeCipher(imagePath);
+            DeCipher deCipher = new DeCipher();
+            text_source2.Text = deCipher.DeCipher_img(imagePath2);
         }
         private void Btn_ImportImage2_Click(object sender, RoutedEventArgs e)
         {
@@ -94,7 +95,8 @@ namespace Steganography
 
                 imgsource2.Source = new BitmapImage(new Uri(imagePath2));
 
-                File.Copy(imagePath, copyPath, true);
+                File.Copy(imagePath2, copyPath, true);
+                btn_DeCipher.IsEnabled = true;
             }
         }
     }
