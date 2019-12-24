@@ -26,7 +26,22 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Расшифровать">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80*"/>
+                        <ColumnDefinition Width="51*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,10,60">
+                        <Image x:Name="imgsource2"/>
+                    </Border>
+                    <Button x:Name="btn_ImportImage2" Content="Загрузить изображение"
+                            HorizontalAlignment="Right" Margin="0,0,10,35" VerticalAlignment="Bottom" Width="152" HorizontalContentAlignment="Center" Click="Btn_ImportImage2_Click"/>
+                    <Button x:Name="btn_DeCipher" Content="Расшифровать" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="152" Click="Btn_DeCipher_Click"/>
+                    <TextBox x:Name="text_source2" Grid.Column="1" HorizontalAlignment="Left" Height="371" Margin="10,10,0,0" TextWrapping="Wrap" Text="Здесь будет ваш текст" VerticalAlignment="Top" Width="286" VerticalScrollBarVisibility="Auto" FontSize="14" IsReadOnly="True"/>
+
+
+                </Grid>
+
             </TabItem>
         </TabControl>
     </Grid>

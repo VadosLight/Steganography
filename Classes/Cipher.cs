@@ -9,14 +9,13 @@ namespace Steganography.Classes
 {
     class Cipher
     {
-        private string text, imgPath, typeOfImage;
+        private string text, imgPath;
         
 
         public Cipher(string text, string imgPath, string typeOfImage)
         {
             this.text = text;
             this.imgPath = imgPath;
-            this.typeOfImage = typeOfImage;
             Cipher_img();
         }
         
@@ -55,7 +54,7 @@ namespace Steganography.Classes
 
     class DeCipher
     {
-        private string text, imgPath;
+        private string imgPath;
         public DeCipher(string imgPath)
         {
             this.imgPath = imgPath;

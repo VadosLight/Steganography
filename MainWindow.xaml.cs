@@ -28,11 +28,27 @@ namespace Steganography
 
         public string typeOfFile = "";
         public string imagePath = "";
+        public string imagePath2 = "";
+
         public string copyPath = "";
 
         private void Btn_ImportImage_Click(object sender, RoutedEventArgs e)
         {
-            LoadImage();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                imagePath = openFileDialog.FileName;
+                typeOfFile = TypeOfFile(imagePath).ToLower();
+
+                copyPath = AppDomain.CurrentDomain.BaseDirectory + "\\tmp." + typeOfFile;
+
+                imgsource.Source = new BitmapImage(new Uri(imagePath));
+
+                File.Copy(imagePath, copyPath, true);
+
+            }
         }
 
         private void Btn_Cipher_Click(object sender, RoutedEventArgs e)
@@ -54,33 +70,32 @@ namespace Steganography
             Environment.Exit(0);
         }
 
-        private void LoadImage()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp";
-            
-            
-            if (openFileDialog.ShowDialog() == true)
-            {
-
-                
-                imagePath = openFileDialog.FileName;
-                typeOfFile = TypeOfFile(imagePath).ToLower();
-
-                copyPath = AppDomain.CurrentDomain.BaseDirectory + "\\tmp." + typeOfFile;
-
-                imgsource.Source = new BitmapImage(new Uri(imagePath));
-               
-                File.Copy(imagePath, copyPath, true);
-              
-            }
-        }
-
         public string TypeOfFile(string fileName)
         {
             return fileName.Substring(fileName.LastIndexOf(".") + 1);
         }
 
-        
+        private void Btn_DeCipher_Click(object sender, RoutedEventArgs e)
+        {
+            DeCipher deCipher = new DeCipher(imagePath);
+        }
+        private void Btn_ImportImage2_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp";
+
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                imagePath2 = openFileDialog.FileName;
+                typeOfFile = TypeOfFile(imagePath2).ToLower();
+
+                copyPath = AppDomain.CurrentDomain.BaseDirectory + "\\tmp2." + typeOfFile;
+
+                imgsource2.Source = new BitmapImage(new Uri(imagePath2));
+
+                File.Copy(imagePath, copyPath, true);
+            }
+        }
     }
 }
