@@ -6,9 +6,6 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Steganography.Classes;
 
-using System.Drawing;
-using System.Drawing.Imaging;
-
 namespace Steganography
 {
     public partial class MainWindow : Window
@@ -29,9 +26,9 @@ namespace Steganography
         public string typeOfFile = "";
         public string imagePath = "";
         public string imagePath2 = "";
-
         public string copyPath = "";
 
+        //Загружаем изображение для зашифровки
         private void Btn_ImportImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -50,36 +47,7 @@ namespace Steganography
                 btn_Cipher.IsEnabled = true;
             }
         }
-
-        private void Btn_Cipher_Click(object sender, RoutedEventArgs e)
-        {
-            Cipher cipher = new Cipher(text_source.Text, copyPath, typeOfFile);
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            try{ File.Delete(copyPath); }
-            catch{}
-            Environment.Exit(0);
-        }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            try { File.Delete(copyPath); }
-            catch { }
-            Environment.Exit(0);
-        }
-
-        public string TypeOfFile(string fileName)
-        {
-            return fileName.Substring(fileName.LastIndexOf(".") + 1);
-        }
-
-        private void Btn_DeCipher_Click(object sender, RoutedEventArgs e)
-        {
-            DeCipher deCipher = new DeCipher();
-            text_source2.Text = deCipher.DeCipher_img(imagePath2);
-        }
+        //Загружаем изображение для расшифровки
         private void Btn_ImportImage2_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -99,5 +67,32 @@ namespace Steganography
                 btn_DeCipher.IsEnabled = true;
             }
         }
+        //Шифруем
+        private void Btn_Cipher_Click(object sender, RoutedEventArgs e)
+        {
+            Cipher cipher = new Cipher(text_source.Text, copyPath, typeOfFile);
+        }
+        //Расшифровываем
+        private void Btn_DeCipher_Click(object sender, RoutedEventArgs e)
+        {
+            DeCipher deCipher = new DeCipher();
+            text_source2.Text = deCipher.DeCipher_img(imagePath2);
+        }
+        public string TypeOfFile(string fileName)
+        {
+            return fileName.Substring(fileName.LastIndexOf(".") + 1);
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try{ File.Delete(copyPath); }
+            catch{}
+            Environment.Exit(0);
+        }
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            try { File.Delete(copyPath); }
+            catch { }
+            Environment.Exit(0);
+        }      
     }
 }

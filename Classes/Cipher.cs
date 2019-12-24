@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -27,7 +25,7 @@ namespace Steganography.Classes
 
             var img_BIN = File.ReadAllBytes(imgPath);
            
-            //Добавляем комментарий
+            //Добавляем метку комментария
             img_comment.AddRange(img_BIN);
             img_comment.Add(0xFF);
             img_comment.Add(0xFE);
@@ -43,17 +41,6 @@ namespace Steganography.Classes
             {
                 File.WriteAllBytes(sfd.FileName + '.' + typeOfImage, c);
             }
-        }
-
-
-        public static byte[] ConvertToByteArray(string str, Encoding encoding)
-        {
-            return encoding.GetBytes(str);
-        }
-
-        public static String ToBinary(Byte[] data)
-        {
-            return string.Join(" ", data.Select(byt => Convert.ToString(byt, 2).PadLeft(8, '0')));
         }
     }
 
