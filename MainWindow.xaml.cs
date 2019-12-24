@@ -16,14 +16,6 @@ namespace Steganography
         public MainWindow()
         {
             InitializeComponent();
-
-            Image jpg = new Bitmap(@"C:\Users\Vadim\Desktop\1.jpg");
-            jpg.Save(@"C:\Users\Vadim\Desktop\2.bmp", ImageFormat.Bmp);
-
-            Image bmp = new Bitmap(@"C:\Users\Vadim\Desktop\2.bmp");
-            bmp.Save(@"C:\Users\Vadim\Desktop\3.jpg", ImageFormat.Jpeg);
-
-
         }
 
         public string typeOfFile = "";
